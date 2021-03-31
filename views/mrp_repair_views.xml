@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_repair_order_form_new" model="ir.ui.view">
+            <field name="name">view.repair.order.form.new</field>
+            <field name="model">mrp.repair</field>
+            <field name="inherit_id" ref="mrp_repair.view_repair_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='guarantee_limit']" position="after">
+                    <field name="warranty_status"/>
+                </xpath>
+                <xpath expr="//field[@name='address_id']" position="after">
+                    <field name="need_part" attrs="{'readonly': [('state', '=', 'done','under_repair')]}"/>
+                </xpath>
+                  <xpath expr="//field[@name='state']" position="replace">
+                       <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,under_repair,waitingforpart,done"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
